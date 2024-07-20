@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Trading</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <h1>Crypto Trading Data</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Stock</th>
+                <th>Side</th>
+                <th>Price</th>
+                <th>Size</th>
+            </tr>
+        </thead>
+        <tbody id="data-body">
+        </tbody>
+    </table>
+    <script>
+        // Example JavaScript to fetch and display data
+        fetch('/query?stock=BTC')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('data-body');
+                data.bids.forEach(bid => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${bid.price}</td><td>${bid.size}</td>`;
+                    tableBody.appendChild(row);
+                });
+            });
+    </script>
+</body>
+</html>
